@@ -13,34 +13,40 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-20 px-4 gradient-iridescent">
-      <div className="max-w-2xl mx-auto text-center">
-        <div className="glass-effect rounded-3xl p-12 shadow-glass animate-fade-in">
+    <section className="py-20 px-4 gradient-iridescent relative overflow-hidden">
+      {/* Ambient Gradient Background */}
+      <div className="absolute inset-0 animate-pulse-glow opacity-50" />
+      
+      <div className="max-w-2xl mx-auto text-center relative z-10">
+        {/* Central Capsule Form */}
+        <div className="glass-effect rounded-[3rem] p-12 md:p-16 shadow-glow animate-fade-in border-2 border-white/20">
           <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 text-foreground">
             Join the Flow
           </h2>
-          <p className="text-foreground/80 mb-8">
+          <p className="text-foreground/80 mb-8 text-lg">
             Be the first to know about new collections, wellness tips, and exclusive offers.
           </p>
           
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="flex-1 rounded-full px-6 glass-effect border-2 focus:shadow-glow transition-smooth"
-            />
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="glass-effect rounded-full p-2 shadow-soft">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="rounded-full px-6 py-3 bg-transparent border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-center placeholder:text-foreground/50"
+              />
+            </div>
             <Button 
               type="submit" 
-              className="rounded-full px-8 shadow-glow hover:shadow-glow transition-smooth bg-primary hover:bg-primary/90"
+              className="w-full sm:w-auto rounded-full px-12 py-6 text-lg shadow-glow hover:shadow-glow transition-smooth bg-primary hover:bg-primary/90 hover:scale-105"
             >
               Subscribe
             </Button>
           </form>
           
-          <p className="text-sm text-muted-foreground mt-4">
+          <p className="text-sm text-muted-foreground mt-6">
             We respect your privacy. Unsubscribe anytime.
           </p>
         </div>

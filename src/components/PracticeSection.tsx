@@ -7,20 +7,23 @@ const practices = [
   {
     name: "Yoga",
     image: yogaImage,
-    description: "Flow through poses with grace and mindfulness",
-    href: "/shop?practice=yoga"
+    description: "Flow through mindful movement",
+    href: "/shop?practice=yoga",
+    gradient: "from-primary/20 to-secondary/20",
   },
   {
     name: "Barre",
     image: barreImage,
-    description: "Ballet-inspired strength and elegance",
-    href: "/shop?practice=barre"
+    description: "Strengthen with grace",
+    href: "/shop?practice=barre",
+    gradient: "from-secondary/20 to-accent/20",
   },
   {
     name: "Pilates",
     image: pilatesImage,
-    description: "Core-focused control and precision",
-    href: "/shop?practice=pilates"
+    description: "Core strength meets elegance",
+    href: "/shop?practice=pilates",
+    gradient: "from-accent/20 to-primary/20",
   }
 ];
 
@@ -32,40 +35,44 @@ const PracticeSection = () => {
           <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4">
             Shop by <span className="text-gradient">Practice</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Curated collections for your movement journey
+          <p className="text-lg text-muted-foreground">
+            Designed for how you move
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {practices.map((practice, index) => (
             <Link
               key={practice.name}
               to={practice.href}
-              className="group relative overflow-hidden rounded-3xl shadow-soft hover:shadow-glass transition-smooth animate-fade-in"
-              style={{ animationDelay: `${index * 150}ms` }}
+              className="group block"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="aspect-[3/4] relative">
-                <img
-                  src={practice.image}
-                  alt={`${practice.name} practice`}
-                  className="w-full h-full object-cover transition-smooth group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-              </div>
-              
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="font-playfair text-2xl font-semibold mb-2 text-foreground">
-                  {practice.name}
-                </h3>
-                <p className="text-foreground/80 text-sm">
-                  {practice.description}
-                </p>
-              </div>
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-soft hover:shadow-glow transition-smooth hover:-translate-y-2 animate-fade-in-up">
+                {/* Capsule Card with Gradient Background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${practice.gradient} opacity-0 group-hover:opacity-100 transition-smooth`} />
+                
+                {/* Image */}
+                <div className="aspect-[4/5] relative">
+                  <img
+                    src={practice.image}
+                    alt={`${practice.name} practice`}
+                    className="w-full h-full object-cover transition-smooth group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+                </div>
 
-              {/* Hover Glow Effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-smooth pointer-events-none">
-                <div className="absolute inset-0 rounded-3xl border-2 border-primary/50 shadow-glow" />
+                {/* Content Capsule */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="glass-effect rounded-full px-6 py-4 text-center transform transition-smooth group-hover:scale-105">
+                    <h3 className="font-playfair text-2xl font-semibold mb-1 text-foreground">
+                      {practice.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {practice.description}
+                    </p>
+                  </div>
+                </div>
               </div>
             </Link>
           ))}

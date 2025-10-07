@@ -32,6 +32,7 @@ const products = [
 
 const ProductCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const next = () => {
     setCurrentIndex((prev) => (prev + 1) % products.length);
@@ -40,6 +41,16 @@ const ProductCarousel = () => {
   const prev = () => {
     setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
   };
+
+  // Auto-scroll effect
+  useState(() => {
+    const interval = setInterval(() => {
+      if (!isPaused) {
+        next();
+      }
+    }, 4000);
+    return () => clearInterval(interval);
+  });
 
   return (
     <section className="py-20 gradient-soft">
@@ -53,7 +64,11 @@ const ProductCarousel = () => {
           </p>
         </div>
 
-        <div className="relative">
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           {/* Carousel Container */}
           <div className="overflow-hidden">
             <div
@@ -65,35 +80,43 @@ const ProductCarousel = () => {
                   key={product.id}
                   className="w-full flex-shrink-0 px-4"
                 >
-                  <div className="max-w-md mx-auto">
+                  <div className="max-w-md mx-auto animate-float-slow">
                     <Link to={`/product/${product.id}`}>
-                      <div className="relative group rounded-3xl overflow-hidden shadow-soft hover:shadow-glass transition-smooth">
+                      <div className="relative group rounded-[3rem] overflow-hidden shadow-glass hover:shadow-glow transition-smooth hover:-translate-y-2">
                         <div className="aspect-square">
                           <img
                             src={product.image}
                             alt={product.name}
-                            className="w-full h-full object-cover transition-smooth group-hover:scale-105"
+                            className="w-full h-full object-cover transition-smooth group-hover:scale-110"
                           />
                         </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-smooth" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent opacity-0 group-hover:opacity-100 transition-smooth" />
+                        
+                        {/* Quick View Capsule */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-smooth">
+                          <div className="glass-effect rounded-full px-6 py-3 text-sm font-medium">
+                            Quick View
+                          </div>
+                        </div>
                       </div>
                     </Link>
                     
-                    <div className="mt-6 text-center">
-                      <h3 className="font-playfair text-2xl font-semibold mb-2">
+                    {/* Product Info Capsule */}
+                    <div className="mt-6 glass-effect rounded-[2rem] p-6 shadow-soft">
+                      <h3 className="font-playfair text-2xl font-semibold mb-3 text-center">
                         {product.name}
                       </h3>
-                      <div className="flex justify-center gap-2 mb-3">
+                      <div className="flex justify-center gap-2 mb-4">
                         {product.colors.map((color) => (
                           <div
                             key={color}
-                            className="w-6 h-6 rounded-full border-2 border-border glass-effect"
+                            className="w-7 h-7 rounded-full border-2 border-border glass-effect shadow-soft hover:scale-110 transition-smooth cursor-pointer"
                             title={color}
                           />
                         ))}
                       </div>
-                      <p className="text-xl font-medium mb-4">${product.price}</p>
-                      <Button className="rounded-full px-8 shadow-soft hover:shadow-glow transition-smooth">
+                      <p className="text-2xl font-medium mb-4 text-center text-gradient">${product.price}</p>
+                      <Button className="w-full rounded-full px-8 shadow-soft hover:shadow-glow transition-smooth hover:scale-105">
                         Quick Add
                       </Button>
                     </div>
@@ -103,12 +126,12 @@ const ProductCarousel = () => {
             </div>
           </div>
 
-          {/* Navigation Buttons */}
+          {/* Navigation Capsule Buttons */}
           <Button
             variant="outline"
             size="icon"
             onClick={prev}
-            className="absolute left-4 top-1/3 -translate-y-1/2 rounded-full glass-effect shadow-glass hover:shadow-glow transition-smooth"
+            className="absolute left-4 top-1/3 -translate-y-1/2 rounded-full glass-effect shadow-glass hover:shadow-glow transition-smooth hover:scale-110 w-12 h-12"
           >
             <ChevronLeft className="w-5 h-5" />
           </Button>
@@ -116,21 +139,21 @@ const ProductCarousel = () => {
             variant="outline"
             size="icon"
             onClick={next}
-            className="absolute right-4 top-1/3 -translate-y-1/2 rounded-full glass-effect shadow-glass hover:shadow-glow transition-smooth"
+            className="absolute right-4 top-1/3 -translate-y-1/2 rounded-full glass-effect shadow-glass hover:shadow-glow transition-smooth hover:scale-110 w-12 h-12"
           >
             <ChevronRight className="w-5 h-5" />
           </Button>
 
-          {/* Dots */}
+          {/* Capsule Dots */}
           <div className="flex justify-center gap-2 mt-8">
             {products.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-smooth ${
+                className={`h-2 rounded-full transition-smooth shadow-soft hover:shadow-glow ${
                   index === currentIndex
-                    ? "bg-primary w-8"
-                    : "bg-muted-foreground/30"
+                    ? "bg-primary w-10"
+                    : "bg-muted-foreground/30 w-2"
                 }`}
               />
             ))}

@@ -17,29 +17,31 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/60" />
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-6 md:px-12 py-24 md:py-32 lg:py-40 animate-fade-in-up">
-          <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-tight">
-            Move beautifully.
-            <br />
-            <span className="text-gradient">Live intentionally.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto">
-            Premium athleisure designed for yoga, barre, and pilates. 
-            Experience the perfect blend of comfort and elegance.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="rounded-full px-8 shadow-glow hover:shadow-glow transition-smooth bg-primary hover:bg-primary/90 text-primary-foreground">
-              Shop Collection
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="rounded-full px-8 glass-effect border-2 hover:bg-card/50 transition-smooth"
-            >
-              <Play className="w-4 h-4 mr-2" />
-              Watch the Flow
-            </Button>
+        {/* Content - Capsule Pod */}
+        <div className="relative z-10 flex items-center justify-center px-6 md:px-12 py-24 md:py-32 lg:py-40">
+          <div className="max-w-3xl glass-effect rounded-[3rem] px-8 md:px-12 py-12 md:py-16 shadow-glass animate-fade-in-up">
+            <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-tight text-center">
+              Move beautifully.
+              <br />
+              <span className="text-gradient">Live intentionally.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-foreground/80 mb-8 text-center">
+              Premium athleisure designed for yoga, barre, and pilates. 
+              Experience the perfect blend of comfort and elegance.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button size="lg" className="rounded-full px-8 shadow-glow hover:shadow-glow transition-smooth bg-primary hover:bg-primary/90 text-primary-foreground animate-pulse-glow">
+                Shop Collection
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="rounded-full px-8 glass-effect border-2 hover:bg-card/50 transition-smooth hover:scale-105"
+              >
+                <Play className="w-4 h-4 mr-2" />
+                Watch the Flow
+              </Button>
+            </div>
           </div>
         </div>
 
